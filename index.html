@@ -18,11 +18,11 @@
         .app-container { display: flex; min-height: 100vh; position: relative; z-index: 1; }
         .sidebar { width: 280px; min-height: 100vh; padding: 40px 24px; background: var(--bg-secondary); border-right: 1px solid var(--border-color); position: fixed; left: 0; top: 0; overflow-y: auto; }
         .logo-section { margin-bottom: 40px; }
-        .logo { width: 80px; height: 80px; background: var(--gradient-acid); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3); position: relative; overflow: hidden; }
+        .logo { width: 80px; height: 80px; background: var(--gradient-acid); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3); position: relative; overflow: hidden; cursor: pointer; }
         .logo::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); transform: rotate(45deg); animation: shimmer 3s infinite; }
         @keyframes shimmer { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
         .logo-text { font-size: 28px; font-weight: 800; color: var(--bg-primary); z-index: 1; }
-        .studio-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; background: var(--gradient-acid); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+        .studio-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; background: var(--gradient-acid); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; cursor: pointer; }
         .studio-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
         .social-links { display: flex; gap: 12px; margin-top: 20px; margin-bottom: 40px; }
         .social-btn { display: flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.3s ease; }
@@ -94,6 +94,7 @@
         .legal-page .warning-box p { color: var(--accent-secondary); margin: 0; }
         .legal-page .info-box { background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 16px; margin: 16px 0; }
         .legal-page .info-box p { color: var(--accent-primary); margin: 0; }
+        .url-info { background: var(--bg-secondary); padding: 12px 16px; border-radius: 8px; margin-top: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--text-muted); word-break: break-all; }
         @media (max-width: 1024px) { .sidebar { width: 240px; } .main-content { margin-left: 240px; } .detail-header { flex-direction: column; } .detail-thumbnail { width: 100%; } }
         @media (max-width: 768px) { .sidebar { position: relative; width: 100%; min-height: auto; border-right: none; border-bottom: 1px solid var(--border-color); } .main-content { margin-left: 0; } .app-container { flex-direction: column; } .project-grid { grid-template-columns: 1fr; } }
     </style>
@@ -107,15 +108,16 @@
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script type="text/babel">
-        const { useState } = React;
+        const { useState, useEffect } = React;
 
         const projectsData = [
             {
                 id: 1,
+                slug: "addtimer",
                 title: "AddTimer",
                 category: "app",
                 description: "올인원 타이머 앱 - 스톱워치, 카운트다운, 푸드타이머를 하나에",
-                fullDescription: "AddTimer는 일상에서 필요한 모든 타이머 기능을 하나의 앱에 담았습니다. <br>정밀한 스톱워치, 유연한 카운트다운 타이머, 그리고 요리에 특화된 푸드타이머까지 다양한 콘텐츠 제공<br> 15개 언어를 지원하여 전 세계 어디서나 편리하게 사용할 수 있습니다.",
+                fullDescription: "AddTimer는 일상에서 필요한 모든 타이머 기능을 하나의 앱에 담았습니다. 정밀한 스톱워치, 유연한 카운트다운 타이머, 그리고 요리에 특화된 푸드타이머까지. 17개 언어를 지원하여 전 세계 어디서나 편리하게 사용할 수 있습니다.",
                 thumbnail: "https://pkh8184.github.io/AcidHomePage/Resource/Project_01_AddTimer.jpg",
                 detailImage: "https://pkh8184.github.io/AcidHomePage/Resource/Set_01_AddTimer.jpg",
                 projectUrl: "https://play.google.com/store",
@@ -124,7 +126,7 @@
                     { title: "카운트다운", desc: "프리셋 버튼, 시간 추가, 빠른 설정" },
                     { title: "푸드타이머", desc: "8개 카테고리, 온도 표시, 레시피 가이드" },
                     { title: "레시피북", desc: "진행률 시스템, 100% 달성 축하 효과" },
-                    { title: "15개 언어", desc: "한/영/일/중 외 11개 언어 지원" },
+                    { title: "17개 언어", desc: "한/영/일/중 외 13개 언어 지원" },
                     { title: "다크모드", desc: "눈이 편안한 다크/라이트 테마" }
                 ],
                 languages: ["한국어", "English", "日本語", "简体中文", "繁體中文", "Español", "Português", "Deutsch", "Français", "Italiano", "Bahasa Indonesia", "Tiếng Việt", "ไทย", "Türkçe", "العربية", "हिन्दी", "Polski", "Nederlands"],
@@ -133,10 +135,11 @@
             },
             {
                 id: 2,
+                slug: "simplefx",
                 title: "SimpleFx",
                 category: "asset",
                 description: "Unity용 올인원 이펙트 에셋 - 슬래시, 히트, 자연효과, 버프 등",
-                fullDescription: "SimpleFx는 게임 개발에 필요한 다양한 시각 효과를 손쉽게 적용할 수 있는 Unity 에셋입니다. <br>전투 이펙트부터 자연 효과, 버프/디버프 시각화까지 폭넓은 이펙트를 제공하며, 간단한 설정만으로 프로젝트에 즉시 활용할 수 있습니다.",
+                fullDescription: "SimpleFx는 게임 개발에 필요한 다양한 시각 효과를 손쉽게 적용할 수 있는 Unity 에셋입니다. 전투 이펙트부터 자연 효과, 버프/디버프 시각화까지 폭넓은 이펙트를 제공하며, 간단한 설정만으로 프로젝트에 즉시 활용할 수 있습니다.",
                 thumbnail: "https://pkh8184.github.io/AcidHomePage/Resource/Project_02_SimpleFx.jpg",
                 detailImage: "https://pkh8184.github.io/AcidHomePage/Resource/Set_02_SimpleFx.jpg",
                 projectUrl: "https://assetstore.unity.com",
@@ -208,6 +211,37 @@
             }
         };
 
+        // URL 라우팅 함수들
+        const getBaseUrl = () => {
+            return window.location.origin + window.location.pathname;
+        };
+
+        const navigateTo = (path) => {
+            window.location.hash = path;
+        };
+
+        const parseRoute = () => {
+            const hash = window.location.hash.slice(1); // # 제거
+            if (!hash || hash === '/') return { type: 'home' };
+            
+            const parts = hash.split('/').filter(p => p);
+            
+            if (parts[0] === 'project' && parts[1]) {
+                const slug = parts[1].toLowerCase();
+                const project = projectsData.find(p => p.slug === slug);
+                if (project) {
+                    if (parts[2] === 'terms') {
+                        return { type: 'legal', projectSlug: slug, legalType: 'termsOfService' };
+                    } else if (parts[2] === 'privacy') {
+                        return { type: 'legal', projectSlug: slug, legalType: 'privacyPolicy' };
+                    }
+                    return { type: 'project', projectSlug: slug };
+                }
+            }
+            
+            return { type: 'home' };
+        };
+
         const ProjectCard = ({ project, onClick }) => {
             const tag = getCategoryTag(project.category);
             return (
@@ -226,6 +260,8 @@
 
         const ProjectDetail = ({ project, onBack, onLegalClick }) => {
             const tag = getCategoryTag(project.category);
+            const baseUrl = getBaseUrl();
+            
             return (
                 <div className="project-detail active">
                     <button className="back-btn" onClick={onBack}>
@@ -260,8 +296,7 @@
                     )}
                     {project.languages && (
                         <div className="content-section" style={{ marginBottom: '24px' }}>
-                            <h2>🌍 지원 언어 (15
-개국어)</h2>
+                            <h2>🌍 지원 언어 (17개국어)</h2>
                             <p style={{ lineHeight: '2' }}>{project.languages.join(' • ')}</p>
                         </div>
                     )}
@@ -269,8 +304,14 @@
                         <div className="legal-section">
                             <h3 className="legal-title">📋 법적 고지</h3>
                             <div className="legal-links">
-                                {project.legal.termsOfService && (<a className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('termsOfService', project.id); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>이용약관</a>)}
-                                {project.legal.privacyPolicy && (<a className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('privacyPolicy', project.id); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>개인정보 처리방침</a>)}
+                                {project.legal.termsOfService && (<a className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('termsOfService', project.slug); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>이용약관</a>)}
+                                {project.legal.privacyPolicy && (<a className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('privacyPolicy', project.slug); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>개인정보 처리방침</a>)}
+                            </div>
+                            <div className="url-info">
+                                <strong>🔗 직접 링크:</strong><br/>
+                                프로젝트: {baseUrl}#/project/{project.slug}<br/>
+                                이용약관: {baseUrl}#/project/{project.slug}/terms<br/>
+                                개인정보처리방침: {baseUrl}#/project/{project.slug}/privacy
                             </div>
                         </div>
                     )}
@@ -278,10 +319,12 @@
             );
         };
 
-        const LegalPage = ({ type, projectId, onBack }) => {
-            const project = projectsData.find(p => p.id === projectId);
+        const LegalPage = ({ type, projectSlug, onBack }) => {
+            const project = projectsData.find(p => p.slug === projectSlug);
             const legalType = project.legalType || 'asset';
             const content = legalContent[legalType][type];
+            const baseUrl = getBaseUrl();
+            
             return (
                 <div className="legal-page">
                     <button className="back-btn" onClick={onBack}>
@@ -291,17 +334,20 @@
                     <h1>{content.title}</h1>
                     <p className="last-updated">최종 수정일: {content.lastUpdated}</p>
                     <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>적용 대상: <strong style={{ color: 'var(--accent-primary)' }}>{project.title}</strong></p>
+                    <div className="url-info" style={{ marginBottom: '24px' }}>
+                        <strong>🔗 이 페이지 직접 링크:</strong> {baseUrl}#/project/{projectSlug}/{type === 'termsOfService' ? 'terms' : 'privacy'}
+                    </div>
                     <div dangerouslySetInnerHTML={{ __html: content.content }} />
                 </div>
             );
         };
 
-        const Sidebar = ({ activeCategory, onCategoryChange, projectCounts }) => {
+        const Sidebar = ({ activeCategory, onCategoryChange, projectCounts, onLogoClick }) => {
             return (
                 <aside className="sidebar">
                     <div className="logo-section">
-                        <div className="logo"><span className="logo-text">A</span></div>
-                        <h1 className="studio-name">AcidStudio</h1>
+                        <div className="logo" onClick={onLogoClick}><span className="logo-text">A</span></div>
+                        <h1 className="studio-name" onClick={onLogoClick}>AcidStudio</h1>
                         <p className="studio-desc">게임 / 에셋 / 웹 / 앱<br/>개발 스튜디오</p>
                     </div>
                     <div className="social-links">
@@ -330,30 +376,91 @@
 
         const App = () => {
             const [activeCategory, setActiveCategory] = useState('all');
-            const [selectedProject, setSelectedProject] = useState(null);
-            const [legalView, setLegalView] = useState(null);
-            const projectCounts = { all: projectsData.length, asset: projectsData.filter(p => p.category === 'asset').length, game: projectsData.filter(p => p.category === 'game').length, website: projectsData.filter(p => p.category === 'website').length, app: projectsData.filter(p => p.category === 'app').length };
+            const [currentRoute, setCurrentRoute] = useState(parseRoute());
+            
+            useEffect(() => {
+                const handleHashChange = () => {
+                    setCurrentRoute(parseRoute());
+                };
+                window.addEventListener('hashchange', handleHashChange);
+                return () => window.removeEventListener('hashchange', handleHashChange);
+            }, []);
+
+            const projectCounts = { 
+                all: projectsData.length, 
+                asset: projectsData.filter(p => p.category === 'asset').length, 
+                game: projectsData.filter(p => p.category === 'game').length, 
+                website: projectsData.filter(p => p.category === 'website').length, 
+                app: projectsData.filter(p => p.category === 'app').length 
+            };
+            
             const filteredProjects = activeCategory === 'all' ? projectsData : projectsData.filter(p => p.category === activeCategory);
-            const handleCategoryChange = (category) => { setActiveCategory(category); setSelectedProject(null); setLegalView(null); };
-            const handleProjectClick = (project) => { setSelectedProject(project); setLegalView(null); };
-            const handleBack = () => { setSelectedProject(null); setLegalView(null); };
-            const handleLegalClick = (type, projectId) => { setLegalView({ type, projectId }); };
-            const handleLegalBack = () => { setLegalView(null); };
+            
+            const handleCategoryChange = (category) => { 
+                setActiveCategory(category); 
+                navigateTo('/');
+            };
+            
+            const handleProjectClick = (project) => { 
+                navigateTo(`/project/${project.slug}`);
+            };
+            
+            const handleBack = () => { 
+                navigateTo('/');
+            };
+            
+            const handleLegalClick = (type, projectSlug) => { 
+                const path = type === 'termsOfService' ? 'terms' : 'privacy';
+                navigateTo(`/project/${projectSlug}/${path}`);
+            };
+            
+            const handleLegalBack = () => { 
+                if (currentRoute.projectSlug) {
+                    navigateTo(`/project/${currentRoute.projectSlug}`);
+                } else {
+                    navigateTo('/');
+                }
+            };
+
+            const handleLogoClick = () => {
+                navigateTo('/');
+            };
+
+            const renderContent = () => {
+                if (currentRoute.type === 'legal') {
+                    return <LegalPage type={currentRoute.legalType} projectSlug={currentRoute.projectSlug} onBack={handleLegalBack} />;
+                }
+                
+                if (currentRoute.type === 'project') {
+                    const project = projectsData.find(p => p.slug === currentRoute.projectSlug);
+                    if (project) {
+                        return <ProjectDetail project={project} onBack={handleBack} onLegalClick={handleLegalClick} />;
+                    }
+                }
+                
+                return (
+                    <>
+                        <header className="page-header">
+                            <h1 className="page-title">Our Projects</h1>
+                            <p className="page-subtitle">{activeCategory === 'all' ? '모든 프로젝트' : categories.find(c => c.id === activeCategory)?.name} 목록입니다</p>
+                        </header>
+                        <div className="project-grid">
+                            {filteredProjects.map(project => (<ProjectCard key={project.id} project={project} onClick={() => handleProjectClick(project)} />))}
+                        </div>
+                    </>
+                );
+            };
+
             return (
                 <div className="app-container">
-                    <Sidebar activeCategory={activeCategory} onCategoryChange={handleCategoryChange} projectCounts={projectCounts} />
+                    <Sidebar 
+                        activeCategory={activeCategory} 
+                        onCategoryChange={handleCategoryChange} 
+                        projectCounts={projectCounts}
+                        onLogoClick={handleLogoClick}
+                    />
                     <main className="main-content">
-                        {legalView ? (<LegalPage type={legalView.type} projectId={legalView.projectId} onBack={handleLegalBack} />) : selectedProject ? (<ProjectDetail project={selectedProject} onBack={handleBack} onLegalClick={handleLegalClick} />) : (
-                            <>
-                                <header className="page-header">
-                                    <h1 className="page-title">Our Projects</h1>
-                                    <p className="page-subtitle">{activeCategory === 'all' ? '모든 프로젝트' : categories.find(c => c.id === activeCategory)?.name} 목록입니다</p>
-                                </header>
-                                <div className="project-grid">
-                                    {filteredProjects.map(project => (<ProjectCard key={project.id} project={project} onClick={() => handleProjectClick(project)} />))}
-                                </div>
-                            </>
-                        )}
+                        {renderContent()}
                     </main>
                 </div>
             );
