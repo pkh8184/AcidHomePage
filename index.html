@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AcidStudio - Projects</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-card: #1a1a24;
+            --bg-card-hover: #222230;
+            --accent-primary: #00ff88;
+            --accent-secondary: #ff3366;
+            --accent-tertiary: #6c5ce7;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --border-color: #2a2a3a;
+            --gradient-acid: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
+            --gradient-pink: linear-gradient(135deg, #ff3366 0%, #ff6b9d 100%);
+            --gradient-purple: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Background Effects */
+        .bg-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow {
+            position: fixed;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            filter: blur(150px);
+            opacity: 0.15;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .bg-glow-1 {
+            top: -200px;
+            right: -200px;
+            background: var(--accent-primary);
+        }
+
+        .bg-glow-2 {
+            bottom: -200px;
+            left: -200px;
+            background: var(--accent-tertiary);
+        }
+
+        /* Layout */
+        .app-container {
+            display: flex;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            min-height: 100vh;
+            padding: 40px 24px;
+            background: var(--bg-secondary);
+            border-right: 1px solid var(--border-color);
+            position: fixed;
+            left: 0;
+            top: 0;
+            overflow-y: auto;
+        }
+
+        .logo-section {
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-acid);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent);
+            transform: rotate(45deg);
+            animation: shimmer 3s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) rotate(45deg); }
+        }
+
+        .logo-text {
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--bg-primary);
+            z-index: 1;
+        }
+
+        .studio-name {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            background: var(--gradient-acid);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .studio-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Social Links */
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 20px;
+            margin-bottom: 40px;
+        }
+
+        .social-btn {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .social-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+            transform: translateY(-2px);
+        }
+
+        .social-btn svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        /* Categories */
+        .category-section {
+            margin-bottom: 24px;
+        }
+
+        .category-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            padding: 8px 12px;
+            background: var(--bg-card);
+            border-radius: 6px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--accent-primary);
+        }
+
+        .category-list {
+            list-style: none;
+        }
+
+        .category-item {
+            padding: 10px 12px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .category-item:hover {
+            background: var(--bg-card);
+            color: var(--text-primary);
+        }
+
+        .category-item.active {
+            background: rgba(0, 255, 136, 0.1);
+            color: var(--accent-primary);
+        }
+
+        .category-item .count {
+            margin-left: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
+            background: var(--bg-card);
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            margin-left: 280px;
+            padding: 40px;
+        }
+
+        .page-header {
+            margin-bottom: 40px;
+        }
+
+        .page-title {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            letter-spacing: -1px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: var(--text-secondary);
+        }
+
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .breadcrumb-item {
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .breadcrumb-item:hover {
+            color: var(--accent-primary);
+        }
+
+        .breadcrumb-separator {
+            color: var(--text-muted);
+        }
+
+        .breadcrumb-current {
+            color: var(--text-primary);
+        }
+
+        /* Project Grid */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 24px;
+        }
+
+        .project-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            animation: fadeInUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--accent-primary);
+            box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.15s; }
+        .project-card:nth-child(3) { animation-delay: 0.2s; }
+        .project-card:nth-child(4) { animation-delay: 0.25s; }
+        .project-card:nth-child(5) { animation-delay: 0.3s; }
+        .project-card:nth-child(6) { animation-delay: 0.35s; }
+
+        .project-thumbnail {
+            width: 100%;
+            height: 200px;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .project-card:hover .project-thumbnail img {
+            transform: scale(1.1);
+        }
+
+        .project-thumbnail-placeholder {
+            width: 80px;
+            height: 80px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: 800;
+        }
+
+        .project-info {
+            padding: 20px;
+        }
+
+        .project-category-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+
+        .tag-asset {
+            background: rgba(0, 255, 136, 0.15);
+            color: var(--accent-primary);
+        }
+
+        .tag-game {
+            background: rgba(255, 51, 102, 0.15);
+            color: var(--accent-secondary);
+        }
+
+        .tag-website {
+            background: rgba(108, 92, 231, 0.15);
+            color: var(--accent-tertiary);
+        }
+
+        .project-title {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-primary);
+        }
+
+        .project-desc {
+            font-size: 13px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Project Detail View */
+        .project-detail {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .project-detail.active {
+            display: block;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 20px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+
+        .back-btn:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--accent-primary);
+        }
+
+        .detail-header {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .detail-thumbnail {
+            width: 400px;
+            height: 300px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .detail-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .detail-info {
+            flex: 1;
+        }
+
+        .detail-title {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 16px;
+        }
+
+        .detail-desc {
+            font-size: 16px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 24px;
+        }
+
+        .detail-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .detail-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 24px;
+            background: var(--gradient-acid);
+            border-radius: 10px;
+            color: var(--bg-primary);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .detail-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.4);
+        }
+
+        .detail-link.secondary {
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .detail-link.secondary:hover {
+            border-color: var(--accent-primary);
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2);
+        }
+
+        /* Legal Links Section */
+        .legal-section {
+            margin-top: 40px;
+            padding: 24px;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .legal-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 16px;
+            color: var(--text-primary);
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .legal-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 16px;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .legal-link:hover {
+            background: var(--bg-card-hover);
+            color: var(--text-primary);
+            border-color: var(--accent-tertiary);
+        }
+
+        /* Content Section */
+        .content-section {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px;
+            border: 1px solid var(--border-color);
+        }
+
+        .content-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .content-section p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 16px;
+        }
+
+        /* Legal Page Styles */
+        .legal-page {
+            max-width: 800px;
+        }
+
+        .legal-page h1 {
+            font-size: 36px;
+            margin-bottom: 8px;
+        }
+
+        .legal-page .last-updated {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+
+        .legal-page h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 32px;
+            margin-bottom: 16px;
+            color: var(--accent-primary);
+        }
+
+        .legal-page p, .legal-page li {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .legal-page ul {
+            margin-left: 24px;
+            margin-bottom: 16px;
+        }
+
+        .legal-page li {
+            margin-bottom: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .sidebar {
+                width: 240px;
+            }
+            .main-content {
+                margin-left: 240px;
+            }
+            .detail-header {
+                flex-direction: column;
+            }
+            .detail-thumbnail {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                position: relative;
+                width: 100%;
+                min-height: auto;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+            }
+            .main-content {
+                margin-left: 0;
+            }
+            .app-container {
+                flex-direction: column;
+            }
+            .project-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-grid"></div>
+    <div class="bg-glow bg-glow-1"></div>
+    <div class="bg-glow bg-glow-2"></div>
+
+    <div id="app"></div>
+
+    <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+        const { useState, useEffect } = React;
+
+        // 프로젝트 데이터 - 여기서 프로젝트를 추가/수정하세요
+        const projectsData = [
+            {
+                id: 1,
+                title: "Sample Asset Pack",
+                category: "asset",
+                description: "Unity용 샘플 에셋 팩입니다.",
+                fullDescription: "이 에셋 팩은 게임 개발에 필요한 다양한 리소스를 포함하고 있습니다. 3D 모델, 텍스처, 머티리얼 등이 포함되어 있어 빠른 프로토타이핑에 적합합니다.",
+                thumbnail: "", // 이미지 URL을 여기에 입력
+                projectUrl: "https://example.com",
+                // 약관 설정 - 사용할 약관을 선택하세요
+                legal: {
+                    termsOfService: true,  // 이용약관 사용 여부
+                    privacyPolicy: true    // 개인정보 처리방침 사용 여부
+                }
+            },
+            {
+                id: 2,
+                title: "Puzzle Game",
+                category: "game",
+                description: "캐주얼 퍼즐 게임입니다.",
+                fullDescription: "색다른 메카닉을 가진 퍼즐 게임입니다. 직관적인 조작법과 점진적인 난이도 상승으로 누구나 즐길 수 있습니다.",
+                thumbnail: "",
+                projectUrl: "https://example.com",
+                legal: {
+                    termsOfService: true,
+                    privacyPolicy: true
+                }
+            },
+            {
+                id: 3,
+                title: "Portfolio Website",
+                category: "website",
+                description: "포트폴리오 웹사이트 템플릿",
+                fullDescription: "개발자와 디자이너를 위한 포트폴리오 웹사이트 템플릿입니다. 반응형 디자인과 다크 테마를 지원합니다.",
+                thumbnail: "",
+                projectUrl: "https://example.com",
+                legal: {
+                    termsOfService: false,
+                    privacyPolicy: true
+                }
+            }
+        ];
+
+        // 약관 내용 - 필요에 따라 수정하세요
+        const legalContent = {
+            termsOfService: {
+                title: "이용약관",
+                lastUpdated: "2025년 1월 25일",
+                content: `
+                    <h2>제1조 (목적)</h2>
+                    <p>본 약관은 AcidStudio(이하 "회사")가 제공하는 서비스의 이용조건 및 절차, 회사와 이용자의 권리, 의무, 책임사항을 규정함을 목적으로 합니다.</p>
+                    
+                    <h2>제2조 (정의)</h2>
+                    <p>"서비스"란 회사가 제공하는 모든 서비스를 의미합니다.</p>
+                    <p>"이용자"란 본 약관에 따라 회사가 제공하는 서비스를 받는 자를 의미합니다.</p>
+                    
+                    <h2>제3조 (약관의 효력 및 변경)</h2>
+                    <p>본 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게 공지함으로써 효력이 발생합니다.</p>
+                    <p>회사는 필요하다고 인정되는 경우 본 약관을 변경할 수 있으며, 변경된 약관은 공지사항을 통해 공지합니다.</p>
+                    
+                    <h2>제4조 (서비스의 제공)</h2>
+                    <p>회사는 다음과 같은 서비스를 제공합니다:</p>
+                    <ul>
+                        <li>게임 및 애플리케이션 서비스</li>
+                        <li>에셋 및 도구 제공 서비스</li>
+                        <li>기타 회사가 정하는 서비스</li>
+                    </ul>
+                    
+                    <h2>제5조 (서비스 이용)</h2>
+                    <p>서비스 이용은 회사의 서비스 사용 승낙 직후부터 가능합니다.</p>
+                    
+                    <h2>제6조 (책임의 제한)</h2>
+                    <p>회사는 천재지변 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.</p>
+                `
+            },
+            privacyPolicy: {
+                title: "개인정보 처리방침",
+                lastUpdated: "2025년 1월 25일",
+                content: `
+                    <h2>1. 개인정보의 수집 및 이용 목적</h2>
+                    <p>회사는 다음의 목적을 위하여 개인정보를 처리합니다:</p>
+                    <ul>
+                        <li>서비스 제공 및 운영</li>
+                        <li>고객 문의 응대</li>
+                        <li>서비스 개선 및 신규 서비스 개발</li>
+                    </ul>
+                    
+                    <h2>2. 수집하는 개인정보의 항목</h2>
+                    <p>회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집할 수 있습니다:</p>
+                    <ul>
+                        <li>필수항목: 이메일 주소, 기기 정보</li>
+                        <li>선택항목: 닉네임, 프로필 정보</li>
+                    </ul>
+                    
+                    <h2>3. 개인정보의 보유 및 이용 기간</h2>
+                    <p>회사는 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다.</p>
+                    
+                    <h2>4. 개인정보의 제3자 제공</h2>
+                    <p>회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다:</p>
+                    <ul>
+                        <li>이용자가 사전에 동의한 경우</li>
+                        <li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li>
+                    </ul>
+                    
+                    <h2>5. 개인정보 보호책임자</h2>
+                    <p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 개인정보 보호책임자를 지정하고 있습니다.</p>
+                    
+                    <h2>6. 개인정보 처리방침의 변경</h2>
+                    <p>이 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.</p>
+                `
+            }
+        };
+
+        // 카테고리 설정
+        const categories = [
+            { id: 'all', name: '전체', icon: '🎯' },
+            { id: 'asset', name: '에셋', icon: '📦' },
+            { id: 'game', name: '게임', icon: '🎮' },
+            { id: 'website', name: '홈페이지', icon: '🌐' }
+        ];
+
+        // 카테고리별 색상
+        const getCategoryTag = (category) => {
+            switch(category) {
+                case 'asset': return { class: 'tag-asset', label: 'ASSET' };
+                case 'game': return { class: 'tag-game', label: 'GAME' };
+                case 'website': return { class: 'tag-website', label: 'WEBSITE' };
+                default: return { class: 'tag-asset', label: category.toUpperCase() };
+            }
+        };
+
+        // 프로젝트 카드 컴포넌트
+        const ProjectCard = ({ project, onClick }) => {
+            const tag = getCategoryTag(project.category);
+            
+            return (
+                <div className="project-card" onClick={onClick}>
+                    <div className="project-thumbnail">
+                        {project.thumbnail ? (
+                            <img src={project.thumbnail} alt={project.title} />
+                        ) : (
+                            <div 
+                                className="project-thumbnail-placeholder"
+                                style={{ 
+                                    background: project.category === 'asset' ? 'var(--gradient-acid)' :
+                                               project.category === 'game' ? 'var(--gradient-pink)' :
+                                               'var(--gradient-purple)',
+                                    color: 'var(--bg-primary)'
+                                }}
+                            >
+                                {project.title.charAt(0)}
+                            </div>
+                        )}
+                    </div>
+                    <div className="project-info">
+                        <span className={`project-category-tag ${tag.class}`}>{tag.label}</span>
+                        <h3 className="project-title">{project.title}</h3>
+                        <p className="project-desc">{project.description}</p>
+                    </div>
+                </div>
+            );
+        };
+
+        // 프로젝트 상세 컴포넌트
+        const ProjectDetail = ({ project, onBack, onLegalClick }) => {
+            const tag = getCategoryTag(project.category);
+            
+            return (
+                <div className="project-detail active">
+                    <button className="back-btn" onClick={onBack}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        프로젝트 목록으로
+                    </button>
+                    
+                    <div className="detail-header">
+                        <div className="detail-thumbnail">
+                            {project.thumbnail ? (
+                                <img src={project.thumbnail} alt={project.title} />
+                            ) : (
+                                <div style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
+                                    background: project.category === 'asset' ? 'var(--gradient-acid)' :
+                                               project.category === 'game' ? 'var(--gradient-pink)' :
+                                               'var(--gradient-purple)',
+                                    fontSize: '72px',
+                                    fontWeight: '800',
+                                    color: 'var(--bg-primary)'
+                                }}>
+                                    {project.title.charAt(0)}
+                                </div>
+                            )}
+                        </div>
+                        <div className="detail-info">
+                            <span className={`project-category-tag ${tag.class}`}>{tag.label}</span>
+                            <h1 className="detail-title">{project.title}</h1>
+                            <p className="detail-desc">{project.fullDescription}</p>
+                            <div className="detail-links">
+                                {project.projectUrl && (
+                                    <a href={project.projectUrl} className="detail-link" target="_blank" rel="noopener noreferrer">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+                                        </svg>
+                                        프로젝트 바로가기
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    {(project.legal.termsOfService || project.legal.privacyPolicy) && (
+                        <div className="legal-section">
+                            <h3 className="legal-title">📋 법적 고지</h3>
+                            <div className="legal-links">
+                                {project.legal.termsOfService && (
+                                    <a 
+                                        href="#" 
+                                        className="legal-link"
+                                        onClick={(e) => { e.preventDefault(); onLegalClick('termsOfService', project.id); }}
+                                    >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/>
+                                            <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/>
+                                        </svg>
+                                        이용약관
+                                    </a>
+                                )}
+                                {project.legal.privacyPolicy && (
+                                    <a 
+                                        href="#" 
+                                        className="legal-link"
+                                        onClick={(e) => { e.preventDefault(); onLegalClick('privacyPolicy', project.id); }}
+                                    >
+                                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                                        </svg>
+                                        개인정보 처리방침
+                                    </a>
+                                )}
+                            </div>
+                        </div>
+                    )}
+                    
+                    <div className="content-section" style={{ marginTop: '24px' }}>
+                        <h2>프로젝트 소개</h2>
+                        <p>{project.fullDescription}</p>
+                        <p>더 자세한 내용은 프로젝트 페이지를 방문해 주세요.</p>
+                    </div>
+                </div>
+            );
+        };
+
+        // 법적 문서 페이지 컴포넌트
+        const LegalPage = ({ type, projectId, onBack }) => {
+            const content = legalContent[type];
+            const project = projectsData.find(p => p.id === projectId);
+            
+            return (
+                <div className="legal-page">
+                    <button className="back-btn" onClick={onBack}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M19 12H5M12 19l-7-7 7-7"/>
+                        </svg>
+                        {project.title}으로 돌아가기
+                    </button>
+                    
+                    <h1>{content.title}</h1>
+                    <p className="last-updated">최종 수정일: {content.lastUpdated}</p>
+                    <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>
+                        적용 프로젝트: <strong style={{ color: 'var(--accent-primary)' }}>{project.title}</strong>
+                    </p>
+                    
+                    <div dangerouslySetInnerHTML={{ __html: content.content }} />
+                </div>
+            );
+        };
+
+        // 사이드바 컴포넌트
+        const Sidebar = ({ activeCategory, onCategoryChange, projectCounts }) => {
+            return (
+                <aside className="sidebar">
+                    <div className="logo-section">
+                        <div className="logo">
+                            <span className="logo-text">A</span>
+                        </div>
+                        <h1 className="studio-name">AcidStudio</h1>
+                        <p className="studio-desc">
+                            게임 / 에셋 / 웹사이트<br/>
+                            개발 스튜디오
+                        </p>
+                    </div>
+                    
+                    <div className="social-links">
+                        <a href="https://discord.gg/your-discord" className="social-btn" target="_blank" rel="noopener noreferrer">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/>
+                            </svg>
+                            Discord
+                        </a>
+                    </div>
+                    
+                    <nav>
+                        <div className="category-section">
+                            <div className="category-title">카테고리</div>
+                            <ul className="category-list">
+                                {categories.map(cat => (
+                                    <li 
+                                        key={cat.id}
+                                        className={`category-item ${activeCategory === cat.id ? 'active' : ''}`}
+                                        onClick={() => onCategoryChange(cat.id)}
+                                    >
+                                        <span>{cat.icon}</span>
+                                        <span>{cat.name}</span>
+                                        <span className="count">{projectCounts[cat.id] || 0}</span>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </nav>
+                </aside>
+            );
+        };
+
+        // 메인 앱 컴포넌트
+        const App = () => {
+            const [activeCategory, setActiveCategory] = useState('all');
+            const [selectedProject, setSelectedProject] = useState(null);
+            const [legalView, setLegalView] = useState(null);
+            
+            // 프로젝트 카운트 계산
+            const projectCounts = {
+                all: projectsData.length,
+                asset: projectsData.filter(p => p.category === 'asset').length,
+                game: projectsData.filter(p => p.category === 'game').length,
+                website: projectsData.filter(p => p.category === 'website').length
+            };
+            
+            // 필터링된 프로젝트
+            const filteredProjects = activeCategory === 'all' 
+                ? projectsData 
+                : projectsData.filter(p => p.category === activeCategory);
+            
+            const handleCategoryChange = (category) => {
+                setActiveCategory(category);
+                setSelectedProject(null);
+                setLegalView(null);
+            };
+            
+            const handleProjectClick = (project) => {
+                setSelectedProject(project);
+                setLegalView(null);
+            };
+            
+            const handleBack = () => {
+                setSelectedProject(null);
+                setLegalView(null);
+            };
+            
+            const handleLegalClick = (type, projectId) => {
+                setLegalView({ type, projectId });
+            };
+            
+            const handleLegalBack = () => {
+                setLegalView(null);
+            };
+            
+            return (
+                <div className="app-container">
+                    <Sidebar 
+                        activeCategory={activeCategory}
+                        onCategoryChange={handleCategoryChange}
+                        projectCounts={projectCounts}
+                    />
+                    
+                    <main className="main-content">
+                        {legalView ? (
+                            <LegalPage 
+                                type={legalView.type}
+                                projectId={legalView.projectId}
+                                onBack={handleLegalBack}
+                            />
+                        ) : selectedProject ? (
+                            <ProjectDetail 
+                                project={selectedProject}
+                                onBack={handleBack}
+                                onLegalClick={handleLegalClick}
+                            />
+                        ) : (
+                            <>
+                                <header className="page-header">
+                                    <h1 className="page-title">Our Projects</h1>
+                                    <p className="page-subtitle">
+                                        {activeCategory === 'all' ? '모든 프로젝트' : 
+                                         categories.find(c => c.id === activeCategory)?.name} 
+                                        {' '}목록입니다
+                                    </p>
+                                </header>
+                                
+                                <div className="project-grid">
+                                    {filteredProjects.map(project => (
+                                        <ProjectCard 
+                                            key={project.id}
+                                            project={project}
+                                            onClick={() => handleProjectClick(project)}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </main>
+                </div>
+            );
+        };
+
+        ReactDOM.createRoot(document.getElementById('app')).render(<App />);
+    </script>
+</body>
+</html>
