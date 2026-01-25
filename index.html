@@ -141,6 +141,12 @@
             });
         };
 
+        // \t를 줄바꿈으로 변환
+        const parseLineBreaks = (str) => {
+            if (!str) return '';
+            return str.replace(/\\t/g, '\n');
+        };
+
         // features 파싱: "제목:설명|제목:설명" -> [{title, desc}, ...]
         const parseFeatures = (str) => {
             if (!str) return [];
@@ -164,7 +170,7 @@
             return base + path;
         };
 
-        // 약관 데이터 (하드코딩 유지)
+        // 약관 데이터
         const legalContent = {
             app: {
                 termsOfService: {
@@ -240,6 +246,12 @@
             return { type: 'home' };
         };
 
+        // 텍스트를 HTML로 변환 (\t -> <br>)
+        const TextWithLineBreaks = ({ text }) => {
+            const html = parseLineBreaks(text).replace(/\n/g, '<br/>');
+            return <span dangerouslySetInnerHTML={{ __html: html }} />;
+        };
+
         const ProjectCard = ({ project, onClick }) => {
             const tag = getCategoryTag(project.category);
             return (
@@ -287,7 +299,7 @@
                         <div className="detail-info">
                             <span className={`project-category-tag ${tag.class}`}>{tag.label}</span>
                             <h1 className="detail-title">{project.title}</h1>
-                            <p className="detail-desc">{project.fullDescription}</p>
+                            <p className="detail-desc"><TextWithLineBreaks text={project.fullDescription} /></p>
                             <div className="detail-links">
                                 {project.projectUrl && (
                                     <a href={project.projectUrl} className="detail-link" target="_blank" rel="noopener noreferrer">
@@ -403,7 +415,6 @@
             const [activeCategory, setActiveCategory] = useState('all');
             const [currentRoute, setCurrentRoute] = useState({ type: 'home' });
 
-            // CSV 로드
             useEffect(() => {
                 const loadProjects = async () => {
                     try {
@@ -422,7 +433,6 @@
                 loadProjects();
             }, []);
 
-            // 해시 변경 감지
             useEffect(() => {
                 const handleHashChange = () => setCurrentRoute(parseRoute(projects));
                 window.addEventListener('hashchange', handleHashChange);
