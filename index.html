@@ -6,26 +6,9 @@
     <title>AcidStudio - Projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-primary: #0a0a0f;
-            --bg-secondary: #12121a;
-            --bg-card: #1a1a24;
-            --bg-card-hover: #222230;
-            --accent-primary: #00ff88;
-            --accent-secondary: #ff3366;
-            --accent-tertiary: #6c5ce7;
-            --accent-app: #ff9f43;
-            --text-primary: #ffffff;
-            --text-secondary: #a0a0b0;
-            --text-muted: #606070;
-            --border-color: #2a2a3a;
-            --gradient-acid: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%);
-            --gradient-pink: linear-gradient(135deg, #ff3366 0%, #ff6b9d 100%);
-            --gradient-purple: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%);
-            --gradient-orange: linear-gradient(135deg, #ff9f43 0%, #ffbe76 100%);
-        }
+        :root { --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-card: #1a1a24; --bg-card-hover: #222230; --accent-primary: #00ff88; --accent-secondary: #ff3366; --accent-tertiary: #6c5ce7; --accent-app: #ff9f43; --text-primary: #ffffff; --text-secondary: #a0a0b0; --text-muted: #606070; --border-color: #2a2a3a; --gradient-acid: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%); --gradient-pink: linear-gradient(135deg, #ff3366 0%, #ff6b9d 100%); --gradient-purple: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); --gradient-orange: linear-gradient(135deg, #ff9f43 0%, #ffbe76 100%); }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Outfit', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
         .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
@@ -60,7 +43,7 @@
         .project-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); cursor: pointer; transition: all 0.3s ease; animation: fadeInUp 0.5s ease forwards; opacity: 0; }
         .project-card:hover { transform: translateY(-8px); border-color: var(--accent-primary); box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15); }
         @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .project-card:nth-child(1) { animation-delay: 0.1s; } .project-card:nth-child(2) { animation-delay: 0.15s; } .project-card:nth-child(3) { animation-delay: 0.2s; } .project-card:nth-child(4) { animation-delay: 0.25s; } .project-card:nth-child(5) { animation-delay: 0.3s; } .project-card:nth-child(6) { animation-delay: 0.35s; }
+        .project-card:nth-child(1) { animation-delay: 0.1s; } .project-card:nth-child(2) { animation-delay: 0.15s; } .project-card:nth-child(3) { animation-delay: 0.2s; } .project-card:nth-child(4) { animation-delay: 0.25s; }
         .project-thumbnail { width: 100%; height: 200px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
         .project-thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
         .project-card:hover .project-thumbnail img { transform: scale(1.1); }
@@ -87,23 +70,30 @@
         .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
         .detail-link { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: var(--gradient-acid); border-radius: 10px; color: var(--bg-primary); text-decoration: none; font-size: 14px; font-weight: 600; transition: all 0.3s ease; }
         .detail-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 255, 136, 0.4); }
-        .detail-link.secondary { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border-color); }
-        .detail-link.secondary:hover { border-color: var(--accent-primary); box-shadow: 0 8px 24px rgba(0, 255, 136, 0.2); }
         .legal-section { margin-top: 40px; padding: 24px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); }
         .legal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
         .legal-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .legal-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.3s ease; }
+        .legal-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.3s ease; cursor: pointer; }
         .legal-link:hover { background: var(--bg-card-hover); color: var(--text-primary); border-color: var(--accent-tertiary); }
         .content-section { background: var(--bg-card); border-radius: 16px; padding: 32px; border: 1px solid var(--border-color); }
         .content-section h2 { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
         .content-section p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
-        .legal-page { max-width: 800px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
+        .feature-item { background: var(--bg-secondary); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); }
+        .feature-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--accent-primary); }
+        .feature-item p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+        .legal-page { max-width: 900px; }
         .legal-page h1 { font-size: 36px; margin-bottom: 8px; }
         .legal-page .last-updated { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
         .legal-page h2 { font-size: 20px; font-weight: 700; margin-top: 32px; margin-bottom: 16px; color: var(--accent-primary); }
+        .legal-page h3 { font-size: 16px; font-weight: 600; margin-top: 24px; margin-bottom: 12px; color: var(--text-primary); }
         .legal-page p, .legal-page li { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
-        .legal-page ul { margin-left: 24px; margin-bottom: 16px; }
+        .legal-page ul, .legal-page ol { margin-left: 24px; margin-bottom: 16px; }
         .legal-page li { margin-bottom: 8px; }
+        .legal-page .warning-box { background: rgba(255, 51, 102, 0.1); border: 1px solid rgba(255, 51, 102, 0.3); border-radius: 8px; padding: 16px; margin: 16px 0; }
+        .legal-page .warning-box p { color: var(--accent-secondary); margin: 0; }
+        .legal-page .info-box { background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 16px; margin: 16px 0; }
+        .legal-page .info-box p { color: var(--accent-primary); margin: 0; }
         @media (max-width: 1024px) { .sidebar { width: 240px; } .main-content { margin-left: 240px; } .detail-header { flex-direction: column; } .detail-thumbnail { width: 100%; } }
         @media (max-width: 768px) { .sidebar { position: relative; width: 100%; min-height: auto; border-right: none; border-bottom: 1px solid var(--border-color); } .main-content { margin-left: 0; } .app-container { flex-direction: column; } .project-grid { grid-template-columns: 1fr; } }
     </style>
@@ -120,13 +110,74 @@
         const { useState } = React;
 
         const projectsData = [
-            { id: 1, title: "AddTimer", category: "asset", description: "Unity용 타이머 에셋입니다.", fullDescription: "Unity 프로젝트에서 간편하게 사용할 수 있는 타이머 에셋입니다. 다양한 타이머 기능을 제공하여 게임 개발을 더욱 편리하게 만들어 줍니다.", thumbnail: "https://pkh8184.github.io/AcidHomePage/Resource/Project_01_AddTimer.jpg", detailImage: "https://pkh8184.github.io/AcidHomePage/Resource/Set_01_AddTimer.jpg", projectUrl: "https://example.com", legal: { termsOfService: true, privacyPolicy: true } },
-            { id: 2, title: "SimpleFx", category: "asset", description: "간편한 이펙트 에셋입니다.", fullDescription: "게임에 다양한 시각 효과를 쉽게 추가할 수 있는 이펙트 에셋입니다. 심플하면서도 효과적인 FX를 제공합니다.", thumbnail: "https://pkh8184.github.io/AcidHomePage/Resource/Project_02_SimpleFx.jpg", detailImage: "https://pkh8184.github.io/AcidHomePage/Resource/Set_02_SimpleFx.jpg", projectUrl: "https://example.com", legal: { termsOfService: true, privacyPolicy: true } }
+            {
+                id: 1,
+                title: "AddTimer",
+                category: "app",
+                description: "올인원 타이머 앱 - 스톱워치, 카운트다운, 푸드타이머를 하나에",
+                fullDescription: "AddTimer는 일상에서 필요한 모든 타이머 기능을 하나의 앱에 담았습니다. 정밀한 스톱워치, 유연한 카운트다운 타이머, 그리고 요리에 특화된 푸드타이머까지. 17개 언어를 지원하여 전 세계 어디서나 편리하게 사용할 수 있습니다.",
+                thumbnail: "https://pkh8184.github.io/AcidHomePage/Resource/Project_01_AddTimer.jpg",
+                detailImage: "https://pkh8184.github.io/AcidHomePage/Resource/Set_01_AddTimer.jpg",
+                projectUrl: "https://play.google.com/store",
+                features: [
+                    { title: "스톱워치", desc: "정밀 측정, 랩타임 기록, 무제한 저장" },
+                    { title: "카운트다운", desc: "프리셋 버튼, 시간 추가, 빠른 설정" },
+                    { title: "푸드타이머", desc: "8개 카테고리, 온도 표시, 레시피 가이드" },
+                    { title: "레시피북", desc: "진행률 시스템, 100% 달성 축하 효과" },
+                    { title: "17개 언어", desc: "한/영/일/중 외 13개 언어 지원" },
+                    { title: "다크모드", desc: "눈이 편안한 다크/라이트 테마" }
+                ],
+                languages: ["한국어", "English", "日本語", "简体中文", "繁體中文", "Español", "Português", "Deutsch", "Français", "Italiano", "Bahasa Indonesia", "Tiếng Việt", "ไทย", "Türkçe", "العربية", "हिन्दी", "Polski", "Nederlands"],
+                legal: { termsOfService: true, privacyPolicy: true },
+                legalType: "app"
+            },
+            {
+                id: 2,
+                title: "SimpleFx",
+                category: "asset",
+                description: "Unity용 올인원 이펙트 에셋 - 슬래시, 히트, 자연효과, 버프 등",
+                fullDescription: "SimpleFx는 게임 개발에 필요한 다양한 시각 효과를 손쉽게 적용할 수 있는 Unity 에셋입니다. 전투 이펙트부터 자연 효과, 버프/디버프 시각화까지 폭넓은 이펙트를 제공하며, 간단한 설정만으로 프로젝트에 즉시 활용할 수 있습니다.",
+                thumbnail: "https://pkh8184.github.io/AcidHomePage/Resource/Project_02_SimpleFx.jpg",
+                detailImage: "https://pkh8184.github.io/AcidHomePage/Resource/Set_02_SimpleFx.jpg",
+                projectUrl: "https://assetstore.unity.com",
+                features: [
+                    { title: "슬래시 이펙트", desc: "검기, 베기, 다양한 무기 궤적 효과" },
+                    { title: "히트 이펙트", desc: "타격감 극대화, 충돌 시각 피드백" },
+                    { title: "자연 효과", desc: "불, 물, 바람, 전기 등 원소 이펙트" },
+                    { title: "버프/디버프", desc: "상태이상, 강화, 힐 등 시각화 효과" },
+                    { title: "최적화", desc: "모바일 최적화, 가벼운 파티클 시스템" },
+                    { title: "커스터마이징", desc: "색상, 크기, 속도 등 자유로운 조절" }
+                ],
+                legal: { termsOfService: true, privacyPolicy: true },
+                legalType: "asset"
+            }
         ];
 
         const legalContent = {
-            termsOfService: { title: "이용약관", lastUpdated: "2025년 1월 25일", content: '<h2>제1조 (목적)</h2><p>본 약관은 AcidStudio(이하 "회사")가 제공하는 서비스의 이용조건 및 절차, 회사와 이용자의 권리, 의무, 책임사항을 규정함을 목적으로 합니다.</p><h2>제2조 (정의)</h2><p>"서비스"란 회사가 제공하는 모든 서비스를 의미합니다.</p><p>"이용자"란 본 약관에 따라 회사가 제공하는 서비스를 받는 자를 의미합니다.</p><h2>제3조 (약관의 효력 및 변경)</h2><p>본 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게 공지함으로써 효력이 발생합니다.</p><p>회사는 필요하다고 인정되는 경우 본 약관을 변경할 수 있으며, 변경된 약관은 공지사항을 통해 공지합니다.</p><h2>제4조 (서비스의 제공)</h2><p>회사는 다음과 같은 서비스를 제공합니다:</p><ul><li>게임 및 애플리케이션 서비스</li><li>에셋 및 도구 제공 서비스</li><li>기타 회사가 정하는 서비스</li></ul><h2>제5조 (서비스 이용)</h2><p>서비스 이용은 회사의 서비스 사용 승낙 직후부터 가능합니다.</p><h2>제6조 (책임의 제한)</h2><p>회사는 천재지변 또는 이에 준하는 불가항력으로 인하여 서비스를 제공할 수 없는 경우에는 서비스 제공에 관한 책임이 면제됩니다.</p>' },
-            privacyPolicy: { title: "개인정보 처리방침", lastUpdated: "2025년 1월 25일", content: '<h2>1. 개인정보의 수집 및 이용 목적</h2><p>회사는 다음의 목적을 위하여 개인정보를 처리합니다:</p><ul><li>서비스 제공 및 운영</li><li>고객 문의 응대</li><li>서비스 개선 및 신규 서비스 개발</li></ul><h2>2. 수집하는 개인정보의 항목</h2><p>회사는 서비스 제공을 위해 다음과 같은 개인정보를 수집할 수 있습니다:</p><ul><li>필수항목: 이메일 주소, 기기 정보</li><li>선택항목: 닉네임, 프로필 정보</li></ul><h2>3. 개인정보의 보유 및 이용 기간</h2><p>회사는 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다.</p><h2>4. 개인정보의 제3자 제공</h2><p>회사는 이용자의 개인정보를 원칙적으로 외부에 제공하지 않습니다. 다만, 아래의 경우에는 예외로 합니다:</p><ul><li>이용자가 사전에 동의한 경우</li><li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li></ul><h2>5. 개인정보 보호책임자</h2><p>회사는 개인정보 처리에 관한 업무를 총괄해서 책임지고, 개인정보 처리와 관련한 정보주체의 불만처리 및 피해구제 등을 위하여 개인정보 보호책임자를 지정하고 있습니다.</p><h2>6. 개인정보 처리방침의 변경</h2><p>이 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경내용의 추가, 삭제 및 정정이 있는 경우에는 변경사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.</p>' }
+            app: {
+                termsOfService: {
+                    title: "이용약관",
+                    lastUpdated: "2025년 1월 25일",
+                    content: '<h2>제1조 (목적)</h2><p>본 약관은 AcidStudio(이하 "회사")가 제공하는 모바일 애플리케이션 서비스(이하 "서비스")의 이용조건 및 절차, 회사와 이용자의 권리, 의무, 책임사항 및 기타 필요한 사항을 규정함을 목적으로 합니다.</p><h2>제2조 (정의)</h2><p>본 약관에서 사용하는 용어의 정의는 다음과 같습니다:</p><ol><li><strong>"서비스"</strong>란 회사가 제공하는 모바일 애플리케이션 및 관련 제반 서비스를 의미합니다.</li><li><strong>"이용자"</strong>란 본 약관에 동의하고 서비스를 이용하는 모든 사용자를 의미합니다.</li><li><strong>"유료 서비스"</strong>란 광고 제거, 프리미엄 기능 등 별도의 요금을 지불하고 이용하는 서비스를 의미합니다.</li><li><strong>"콘텐츠"</strong>란 서비스 내에서 제공되는 모든 정보, 데이터, 텍스트, 이미지, 음성 등을 의미합니다.</li></ol><h2>제3조 (약관의 효력 및 변경)</h2><ol><li>본 약관은 서비스 화면에 게시하거나 기타의 방법으로 이용자에게 공지함으로써 효력이 발생합니다.</li><li>회사는 관련 법령을 위배하지 않는 범위에서 본 약관을 변경할 수 있습니다.</li><li>약관이 변경되는 경우 회사는 변경 내용과 적용일을 명시하여 서비스 내에서 적용일 7일 전부터 공지합니다.</li><li>이용자가 변경된 약관에 동의하지 않는 경우, 서비스 이용을 중단하고 탈퇴할 수 있습니다.</li><li>변경된 약관의 적용일 이후에도 서비스를 계속 이용하는 경우, 변경된 약관에 동의한 것으로 간주합니다.</li></ol><h2>제4조 (서비스의 제공)</h2><p>회사는 다음과 같은 서비스를 제공합니다:</p><ul><li>스톱워치 기능 (기록 저장, 랩타임 측정)</li><li>카운트다운 타이머 기능</li><li>푸드타이머 기능 (조리 시간 안내, 레시피 가이드)</li><li>레시피북 및 진행률 시스템</li><li>다국어 지원 서비스</li><li>유료 광고 제거 서비스</li><li>기타 회사가 추가 개발하거나 제휴를 통해 제공하는 서비스</li></ul><h2>제5조 (서비스 이용)</h2><ol><li>서비스 이용은 회사의 서비스 승낙 및 앱 설치 완료 후 가능합니다.</li><li>서비스는 연중무휴, 1일 24시간 제공을 원칙으로 합니다.</li><li>회사는 서비스 개선, 시스템 점검, 통신 장애 등의 사유로 서비스 제공을 일시적으로 중단할 수 있습니다.</li><li>이용자는 본 약관 및 관계 법령에서 정한 규정을 준수하여야 합니다.</li></ol><h2>제6조 (유료 서비스 및 결제)</h2><h3>6.1 유료 서비스의 범위</h3><ul><li>광고 제거 (영구 적용)</li><li>기타 프리미엄 기능</li></ul><h3>6.2 결제 및 요금</h3><ol><li>유료 서비스의 요금은 서비스 내 또는 앱스토어에 표시된 가격을 따릅니다.</li><li>결제는 Google Play Store, Apple App Store 등 플랫폼 사업자의 결제 시스템을 통해 이루어집니다.</li><li>결제 완료 시 해당 유료 서비스는 즉시 제공됩니다.</li></ol><div class="warning-box"><p><strong>⚠️ 환불 정책 (중요)</strong></p></div><h3>6.3 환불 정책</h3><ol><li><strong>디지털 콘텐츠의 특성상, 구매 완료 후에는 원칙적으로 환불이 불가능합니다.</strong></li><li>유료 서비스 구매 시 서비스의 내용과 기능을 충분히 확인한 후 결제하시기 바랍니다.</li><li>결제 후 서비스가 즉시 제공되므로, 이용자의 단순 변심에 의한 환불은 불가합니다.</li><li>다만, 다음의 경우에 한하여 환불을 검토할 수 있습니다:<ul><li>결제 후 서비스가 전혀 제공되지 않는 명백한 기술적 오류가 있는 경우</li><li>관계 법령에서 정한 환불 사유에 해당하는 경우</li></ul></li><li>환불 요청 시 구매 영수증, 오류 증빙 자료 등을 제출하여야 하며, 회사의 검토 후 환불 여부가 결정됩니다.</li><li>플랫폼(Google Play, App Store)을 통한 결제의 경우, 해당 플랫폼의 환불 정책이 우선 적용될 수 있습니다.</li></ol><h2>제7조 (이용자의 의무)</h2><p>이용자는 다음 행위를 하여서는 안 됩니다:</p><ol><li>타인의 정보를 도용하거나 허위 정보를 등록하는 행위</li><li>서비스의 운영을 방해하거나 비정상적인 방법으로 서비스를 이용하는 행위</li><li>서비스를 이용하여 얻은 정보를 회사의 동의 없이 상업적으로 이용하는 행위</li><li>회사 또는 제3자의 저작권 등 지적재산권을 침해하는 행위</li><li>회사 또는 제3자의 명예를 훼손하거나 업무를 방해하는 행위</li><li>서비스를 해킹, 리버스 엔지니어링, 디컴파일 하는 행위</li><li>결제 시스템을 부정하게 이용하거나 우회하는 행위</li><li>기타 관련 법령이나 본 약관에서 금지하는 행위</li></ol><h2>제8조 (미성년자 이용)</h2><div class="warning-box"><p><strong>⚠️ 미성년자 결제 관련 중요 안내</strong></p></div><ol><li>만 14세 미만의 아동이 유료 서비스를 결제하는 경우, 법정대리인(부모 등)의 동의가 필요합니다.</li><li>미성년자가 법정대리인의 동의 없이 결제한 경우, 법정대리인은 이를 취소할 수 있습니다.</li><li><strong>단, 다음의 경우 환불이 제한됩니다:</strong><ul><li>미성년자가 법정대리인의 동의가 있는 것처럼 속인 경우</li><li>미성년자가 자신의 연령을 속인 경우</li><li>법정대리인으로부터 허락받은 재산 범위 내에서 결제한 경우</li><li>미성년자가 결제 당시 성년자로 신뢰하게 한 경우</li><li>기타 민법상 미성년자 취소권이 제한되는 경우</li></ul></li><li>미성년자 결제 취소 요청 시, 다음 서류를 제출하여야 합니다:<ul><li>법정대리인 확인 서류 (가족관계증명서 등)</li><li>법정대리인 신분증 사본</li><li>결제 영수증</li><li>미성년자 확인 서류</li></ul></li><li>회사는 제출된 서류를 검토한 후 환불 여부를 결정하며, 허위 서류 제출 시 법적 책임이 따를 수 있습니다.</li></ol><h2>제9조 (지적재산권)</h2><ol><li>서비스 내의 모든 콘텐츠에 대한 저작권 및 지적재산권은 회사에 귀속됩니다.</li><li>이용자는 서비스를 이용하여 얻은 정보를 회사의 사전 승낙 없이 복제, 전송, 출판, 배포, 방송 등의 방법으로 이용하거나 제3자에게 이용하게 할 수 없습니다.</li></ol><h2>제10조 (면책조항)</h2><ol><li>회사는 천재지변, 전쟁, 기간통신사업자의 서비스 중단 등 불가항력으로 인한 서비스 중단에 대해 책임을 지지 않습니다.</li><li>회사는 이용자의 귀책사유로 인한 서비스 이용 장애에 대해 책임을 지지 않습니다.</li><li>회사는 이용자가 서비스를 이용하여 기대하는 수익을 얻지 못하거나 상실한 것에 대해 책임을 지지 않습니다.</li><li>회사는 이용자 상호간 또는 이용자와 제3자 간의 분쟁에 대해 개입하거나 책임을 지지 않습니다.</li><li>푸드타이머의 조리 시간 및 온도 정보는 참고용이며, 실제 조리 결과에 대한 책임은 이용자에게 있습니다.</li></ol><h2>제11조 (분쟁 해결)</h2><ol><li>본 약관과 관련하여 분쟁이 발생한 경우, 회사와 이용자는 원만한 해결을 위해 상호 협의합니다.</li><li>협의가 이루어지지 않은 경우, 대한민국 법률에 따라 관할 법원에서 해결합니다.</li><li>본 약관의 해석 및 적용은 대한민국 법률에 따릅니다.</li></ol><h2>제12조 (기타)</h2><ol><li>본 약관에 명시되지 않은 사항은 관련 법령 및 회사가 정한 서비스 이용 안내에 따릅니다.</li><li>이용자가 본 약관을 읽지 않아 발생하는 불이익에 대해 회사는 책임을 지지 않습니다.</li></ol><div class="info-box"><p><strong>본 약관은 2025년 1월 25일부터 시행됩니다.</strong></p></div>'
+                },
+                privacyPolicy: {
+                    title: "개인정보 처리방침",
+                    lastUpdated: "2025년 1월 25일",
+                    content: '<h2>1. 개인정보의 처리 목적</h2><p>AcidStudio(이하 "회사")는 다음의 목적을 위하여 개인정보를 처리합니다.</p><ul><li><strong>서비스 제공:</strong> 앱 기능 제공, 맞춤형 서비스 제공</li><li><strong>서비스 개선:</strong> 서비스 이용 통계, 버그 수정 및 기능 개선</li><li><strong>광고 서비스:</strong> 맞춤형 광고 제공 (광고 ID 활용)</li><li><strong>결제 처리:</strong> 유료 서비스 구매 시 결제 처리 및 확인</li><li><strong>고객 지원:</strong> 문의 응대, 불만 처리</li></ul><h2>2. 수집하는 개인정보의 항목</h2><h3>2.1 필수 수집 항목</h3><ul><li><strong>기기 정보:</strong> 기기 모델, OS 버전, 앱 버전</li><li><strong>서비스 이용 기록:</strong> 앱 사용 시간, 기능 사용 통계</li><li><strong>광고 식별자:</strong> Google Advertising ID (GAID), Apple IDFA</li></ul><h3>2.2 선택 수집 항목</h3><ul><li><strong>결제 정보:</strong> 구매 이력 (결제는 플랫폼사에서 처리)</li><li><strong>알림 설정:</strong> 푸시 알림 토큰</li></ul><h2>3. 개인정보의 처리 및 보유 기간</h2><ul><li><strong>서비스 이용 기록:</strong> 서비스 이용 종료 시까지 (앱 삭제 시)</li><li><strong>결제 관련 기록:</strong> 전자상거래법에 따라 5년</li><li><strong>분쟁 해결 기록:</strong> 분쟁 해결 완료 후 3년</li></ul><h2>4. 개인정보의 제3자 제공</h2><p>회사는 원칙적으로 정보주체의 개인정보를 외부에 제공하지 않습니다. 단, 다음의 경우에는 예외로 합니다:</p><ul><li>정보주체가 사전에 동의한 경우</li><li>법령의 규정에 의거하거나, 수사 목적으로 법령에 정해진 절차와 방법에 따라 수사기관의 요구가 있는 경우</li></ul><h2>5. 개인정보의 파기</h2><p>회사는 개인정보 보유 기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p><h2>6. 정보주체의 권리와 행사 방법</h2><p>정보주체는 회사에 대해 언제든지 다음 각 호의 개인정보 보호 관련 권리를 행사할 수 있습니다:</p><ul><li>개인정보 처리 현황 열람 요구</li><li>오류 등이 있을 경우 정정 요구</li><li>삭제 요구</li><li>처리 정지 요구</li></ul><h2>7. 아동의 개인정보 보호</h2><p>회사는 만 14세 미만 아동의 개인정보를 수집하는 경우 법정대리인의 동의를 받습니다.</p><h2>8. 개인정보 보호책임자</h2><ul><li><strong>개인정보 보호책임자:</strong> AcidStudio 대표</li><li><strong>문의:</strong> 앱 내 설정 > 문의하기</li></ul><h2>9. 개인정보 처리방침의 변경</h2><p>이 개인정보 처리방침은 시행일로부터 적용되며, 법령 및 방침에 따른 변경 내용의 추가, 삭제 및 정정이 있는 경우에는 변경 사항의 시행 7일 전부터 공지사항을 통하여 고지할 것입니다.</p><div class="info-box"><p><strong>본 개인정보 처리방침은 2025년 1월 25일부터 시행됩니다.</strong></p></div>'
+                }
+            },
+            asset: {
+                termsOfService: {
+                    title: "이용약관",
+                    lastUpdated: "2025년 1월 25일",
+                    content: '<h2>제1조 (목적)</h2><p>본 약관은 AcidStudio(이하 "판매자")가 Unity Asset Store 또는 기타 플랫폼을 통해 제공하는 디지털 에셋(이하 "에셋")의 이용조건 및 절차, 판매자와 구매자의 권리, 의무, 책임사항을 규정함을 목적으로 합니다.</p><h2>제2조 (정의)</h2><ol><li><strong>"에셋"</strong>이란 판매자가 제공하는 게임 개발용 디지털 리소스(이펙트, 모델, 텍스처, 스크립트 등)를 의미합니다.</li><li><strong>"구매자"</strong>란 본 약관에 동의하고 에셋을 구매하여 사용하는 개인 또는 법인을 의미합니다.</li><li><strong>"프로젝트"</strong>란 구매자가 에셋을 활용하여 개발하는 게임, 애플리케이션, 또는 기타 소프트웨어를 의미합니다.</li></ol><h2>제3조 (라이선스)</h2><h3>3.1 허용되는 사용</h3><ul><li>구매자 본인의 상업적/비상업적 프로젝트에 에셋 사용</li><li>에셋의 수정 및 커스터마이징</li><li>프로젝트 내에 에셋을 통합하여 배포</li><li>여러 프로젝트에 동일 에셋 사용 (1인 1라이선스 기준)</li></ul><h3>3.2 금지되는 사용</h3><div class="warning-box"><p><strong>⚠️ 다음 행위는 엄격히 금지됩니다:</strong></p></div><ul><li>에셋 자체를 재판매, 재배포, 공유하는 행위</li><li>에셋을 다른 에셋 스토어나 플랫폼에 업로드하는 행위</li><li>에셋의 원본 또는 수정본을 무료로 배포하는 행위</li><li>에셋을 에셋 팩, 템플릿, 툴킷의 일부로 재판매하는 행위</li><li>제3자에게 라이선스를 양도하거나 서브라이선스하는 행위</li></ul><h2>제4조 (결제 및 가격)</h2><ol><li>에셋의 가격은 Unity Asset Store 또는 해당 판매 플랫폼에 표시된 금액을 따릅니다.</li><li>가격은 부가가치세 등 관련 세금이 별도로 부과될 수 있습니다.</li></ol><h2>제5조 (환불 정책)</h2><div class="warning-box"><p><strong>⚠️ 환불 정책 (매우 중요)</strong></p></div><ol><li><strong>디지털 콘텐츠의 특성상, 구매 완료 후에는 원칙적으로 환불이 불가능합니다.</strong></li><li>에셋은 구매 즉시 다운로드 및 사용이 가능한 디지털 콘텐츠이므로, 구매자의 단순 변심에 의한 환불은 불가합니다.</li><li>구매 전 에셋 설명, 스크린샷, 데모 영상 등을 충분히 확인하시기 바랍니다.</li><li><strong>다음의 경우에 한하여 환불을 검토할 수 있습니다:</strong><ul><li>에셋 설명과 실제 내용이 현저히 다른 경우</li><li>기술적 결함으로 에셋이 전혀 작동하지 않고, 판매자가 합리적인 기간 내 해결하지 못하는 경우</li><li>동일한 에셋을 중복 구매한 경우 (1건에 한해)</li></ul></li><li>환불 요청은 구매 후 14일 이내에 하여야 합니다.</li><li>Unity Asset Store를 통해 구매한 경우, Unity의 환불 정책이 우선 적용됩니다.</li><li><strong>다음의 경우 환불이 거부됩니다:</strong><ul><li>단순 변심 또는 구매자의 기대와 다르다는 이유</li><li>에셋을 이미 프로젝트에 사용한 경우</li><li>구매자의 개발 환경 문제로 인한 호환성 이슈</li><li>구매 후 14일이 경과한 경우</li></ul></li></ol><h2>제6조 (지원 및 업데이트)</h2><ol><li>판매자는 에셋의 기술적 문제에 대해 합리적인 범위 내에서 지원을 제공합니다.</li><li>지원은 에셋 자체의 사용 방법에 한정되며, 구매자의 프로젝트 개발 전반에 대한 지원은 포함되지 않습니다.</li><li>업데이트는 판매자의 재량에 따라 제공됩니다.</li></ol><h2>제7조 (보증의 부인)</h2><ol><li>에셋은 "있는 그대로(AS IS)" 제공되며, 판매자는 에셋의 특정 목적에의 적합성에 대해 보증하지 않습니다.</li><li>에셋 사용으로 인한 모든 결과에 대한 책임은 구매자에게 있습니다.</li></ol><h2>제8조 (책임의 제한)</h2><ol><li>어떠한 경우에도 판매자는 에셋 사용으로 인해 발생하는 간접적, 부수적, 특별, 결과적 손해에 대해 책임을 지지 않습니다.</li><li>판매자의 총 책임은 구매자가 해당 에셋에 대해 지불한 금액을 초과하지 않습니다.</li></ol><h2>제9조 (지적재산권)</h2><ol><li>에셋에 대한 모든 저작권 및 지적재산권은 판매자에게 있습니다.</li><li>구매자는 사용 라이선스를 취득하는 것이며, 에셋의 소유권을 취득하는 것이 아닙니다.</li></ol><h2>제10조 (분쟁 해결)</h2><ol><li>본 약관과 관련된 분쟁은 대한민국 법률에 따라 해결합니다.</li><li>분쟁 발생 시 판매자와 구매자는 원만한 해결을 위해 성실히 협의합니다.</li></ol><div class="info-box"><p><strong>본 약관은 2025년 1월 25일부터 시행됩니다.</strong></p></div>'
+                },
+                privacyPolicy: {
+                    title: "개인정보 처리방침",
+                    lastUpdated: "2025년 1월 25일",
+                    content: '<h2>1. 개인정보의 처리 목적</h2><p>AcidStudio(이하 "회사")는 다음의 목적을 위하여 최소한의 개인정보를 처리합니다:</p><ul><li><strong>고객 지원:</strong> 기술 문의 응대, 문제 해결 지원</li><li><strong>거래 기록:</strong> 구매 확인 및 라이선스 관리</li><li><strong>서비스 개선:</strong> 에셋 품질 향상을 위한 피드백 수집</li></ul><h2>2. 수집하는 개인정보 항목</h2><p>회사는 Unity Asset Store 또는 기타 판매 플랫폼을 통해 에셋을 판매하므로, 직접적으로 수집하는 개인정보는 최소화됩니다:</p><ul><li><strong>고객 문의 시:</strong> 이메일 주소, 문의 내용</li><li><strong>구매 확인 시:</strong> 인보이스 번호, 구매 일자 (플랫폼에서 제공)</li></ul><h2>3. 개인정보의 보유 및 이용 기간</h2><ul><li><strong>고객 문의 기록:</strong> 문의 해결 후 1년</li><li><strong>거래 관련 기록:</strong> 전자상거래법에 따라 5년</li></ul><h2>4. 개인정보의 제3자 제공</h2><p>회사는 원칙적으로 이용자의 개인정보를 외부에 제공하지 않습니다. 다만, 다음의 경우에는 예외로 합니다:</p><ul><li>이용자가 사전에 동의한 경우</li><li>법령의 규정에 의거하거나, 수사기관의 요구가 있는 경우</li></ul><h2>5. 개인정보의 파기</h2><p>회사는 개인정보 보유 기간의 경과, 처리 목적 달성 등 개인정보가 불필요하게 되었을 때에는 지체 없이 해당 개인정보를 파기합니다.</p><h2>6. 정보주체의 권리</h2><p>이용자는 언제든지 다음의 권리를 행사할 수 있습니다:</p><ul><li>개인정보 열람 요구</li><li>오류가 있을 경우 정정 요구</li><li>삭제 요구</li><li>처리정지 요구</li></ul><h2>7. 개인정보 보호책임자</h2><ul><li><strong>개인정보 보호책임자:</strong> AcidStudio 대표</li><li><strong>문의:</strong> 에셋 상세 페이지 내 연락처</li></ul><div class="info-box"><p><strong>본 개인정보 처리방침은 2025년 1월 25일부터 시행됩니다.</strong></p></div>'
+                }
+            }
         };
 
         const categories = [
@@ -190,31 +241,46 @@
                             <h1 className="detail-title">{project.title}</h1>
                             <p className="detail-desc">{project.fullDescription}</p>
                             <div className="detail-links">
-                                {project.projectUrl && (<a href={project.projectUrl} className="detail-link" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>프로젝트 바로가기</a>)}
+                                {project.projectUrl && (<a href={project.projectUrl} className="detail-link" target="_blank" rel="noopener noreferrer"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>바로가기</a>)}
                             </div>
                         </div>
                     </div>
+                    {project.features && (
+                        <div className="content-section" style={{ marginBottom: '24px' }}>
+                            <h2>✨ 주요 기능</h2>
+                            <div className="feature-grid">
+                                {project.features.map((feature, idx) => (
+                                    <div className="feature-item" key={idx}>
+                                        <h4>{feature.title}</h4>
+                                        <p>{feature.desc}</p>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    )}
+                    {project.languages && (
+                        <div className="content-section" style={{ marginBottom: '24px' }}>
+                            <h2>🌍 지원 언어 (17개국어)</h2>
+                            <p style={{ lineHeight: '2' }}>{project.languages.join(' • ')}</p>
+                        </div>
+                    )}
                     {(project.legal.termsOfService || project.legal.privacyPolicy) && (
                         <div className="legal-section">
                             <h3 className="legal-title">📋 법적 고지</h3>
                             <div className="legal-links">
-                                {project.legal.termsOfService && (<a href="#" className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('termsOfService', project.id); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>이용약관</a>)}
-                                {project.legal.privacyPolicy && (<a href="#" className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('privacyPolicy', project.id); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>개인정보 처리방침</a>)}
+                                {project.legal.termsOfService && (<a className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('termsOfService', project.id); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8M10 9H8"/></svg>이용약관</a>)}
+                                {project.legal.privacyPolicy && (<a className="legal-link" onClick={(e) => { e.preventDefault(); onLegalClick('privacyPolicy', project.id); }}><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>개인정보 처리방침</a>)}
                             </div>
                         </div>
                     )}
-                    <div className="content-section" style={{ marginTop: '24px' }}>
-                        <h2>프로젝트 소개</h2>
-                        <p>{project.fullDescription}</p>
-                        <p>더 자세한 내용은 프로젝트 페이지를 방문해 주세요.</p>
-                    </div>
                 </div>
             );
         };
 
         const LegalPage = ({ type, projectId, onBack }) => {
-            const content = legalContent[type];
             const project = projectsData.find(p => p.id === projectId);
+            const legalType = project.legalType || 'asset';
+            const content = legalContent[legalType][type];
             return (
                 <div className="legal-page">
                     <button className="back-btn" onClick={onBack}>
@@ -223,7 +289,7 @@
                     </button>
                     <h1>{content.title}</h1>
                     <p className="last-updated">최종 수정일: {content.lastUpdated}</p>
-                    <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>적용 프로젝트: <strong style={{ color: 'var(--accent-primary)' }}>{project.title}</strong></p>
+                    <p style={{ color: 'var(--text-muted)', marginBottom: '24px' }}>적용 대상: <strong style={{ color: 'var(--accent-primary)' }}>{project.title}</strong></p>
                     <div dangerouslySetInnerHTML={{ __html: content.content }} />
                 </div>
             );
