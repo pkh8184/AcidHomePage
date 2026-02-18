@@ -107,6 +107,7 @@
         const { useState, useEffect } = React;
 
         const parseCSV = (csv) => {
+            csv = csv.replace(/^\uFEFF/, '');
             const lines = csv.trim().split('\n');
             const headers = lines[0].split(',');
             return lines.slice(1).map(line => {
