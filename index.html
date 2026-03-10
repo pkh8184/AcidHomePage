@@ -131,17 +131,26 @@
             </footer>
         );
 
-        const ProjectCard = ({ project, onClick }) => {
+        const ProjectCard = ({ project, onClick, featured }) => {
             const tag = getCategoryTag(project.category);
             return (
-                <div className="project-card" onClick={onClick}>
+                <div className={"project-card" + (featured ? " project-card-featured" : "")} onClick={onClick}>
                     <div className="project-thumbnail">
-                        {project.thumbnail ? <img src={getImageUrl(project.thumbnail)} alt={project.title} /> : <div className="project-thumbnail-placeholder" style={{ background: getCategoryGradient(project.category), color: 'var(--bg-primary)' }}>{project.title?.charAt(0)}</div>}
+                        {project.thumbnail
+                            ? <img src={getImageUrl(project.thumbnail)} alt={project.title} loading="lazy" />
+                            : <div className="project-thumbnail-placeholder" style={{ background: getCategoryGradient(project.category) }}>
+                                {project.title?.charAt(0)}
+                              </div>
+                        }
                     </div>
                     <div className="project-info">
-                        <span className={"project-category-tag " + tag.class}>{tag.label}</span>
+                        <div className="project-meta">
+                            <span className={"project-dot " + tag.class}></span>
+                            <span className="project-category-label">{tag.label}</span>
+                        </div>
                         <h3 className="project-title">{project.title}</h3>
                         <p className="project-desc">{project.description}</p>
+                        <span className="project-arrow">→</span>
                     </div>
                 </div>
             );
@@ -153,39 +162,52 @@
             const languages = parseLanguages(project.languages);
             return (
                 <div className="project-detail active">
-                    <button className="back-btn" onClick={onBack}>← 프로젝트 목록으로</button>
-                    <div className="detail-header">
-                        <div className="detail-thumbnail">
-                            {(project.detailImage || project.thumbnail) ? <img src={getImageUrl(project.detailImage || project.thumbnail)} alt={project.title} /> : <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: getCategoryGradient(project.category), fontSize: '72px', fontWeight: '800', color: 'var(--bg-primary)' }}>{project.title?.charAt(0)}</div>}
-                        </div>
-                        <div className="detail-info">
-                            <span className={"project-category-tag " + tag.class}>{tag.label}</span>
-                            <h1 className="detail-title">{project.title}</h1>
-                            <p className="detail-desc"><TextWithBreaks text={project.fullDescription} /></p>
-                            <div className="detail-links">
-                                {project.projectUrl && <a href={project.projectUrl} className="detail-link" target="_blank" rel="noopener noreferrer">🔗 바로가기</a>}
-                            </div>
-                        </div>
+                    <button className="back-btn" onClick={onBack}>
+                        <span className="back-arrow">←</span> 프로젝트 목록
+                    </button>
+                    <div className="detail-meta">
+                        <span className={"project-dot " + tag.class}></span>
+                        <span className="detail-category">{tag.label}</span>
+                    </div>
+                    <h1 className="detail-title">{project.title}</h1>
+                    <div className="detail-image">
+                        {(project.detailImage || project.thumbnail)
+                            ? <img src={getImageUrl(project.detailImage || project.thumbnail)} alt={project.title} loading="lazy" />
+                            : <div className="detail-image-placeholder" style={{ background: getCategoryGradient(project.category) }}>{project.title?.charAt(0)}</div>
+                        }
+                    </div>
+                    <div className="detail-body">
+                        <p className="detail-desc"><TextWithBreaks text={project.fullDescription} /></p>
+                        {project.projectUrl && (
+                            <a href={project.projectUrl} className="detail-cta" target="_blank" rel="noopener noreferrer">
+                                바로가기 <span>↗</span>
+                            </a>
+                        )}
                     </div>
                     {features.length > 0 && (
-                        <div className="content-section" style={{ marginBottom: '24px' }}>
-                            <h2>✨ 주요 기능</h2>
+                        <div className="detail-section">
+                            <div className="detail-section-header">주요 기능</div>
                             <div className="feature-grid">
-                                {features.map((f, i) => <div className="feature-item" key={i}><h4>{f.title}</h4><p>{f.desc}</p></div>)}
+                                {features.map((f, i) => (
+                                    <div className="feature-item" key={i}>
+                                        <h4>{f.title}</h4>
+                                        <p>{f.desc}</p>
+                                    </div>
+                                ))}
                             </div>
                         </div>
                     )}
                     {languages.length > 0 && (
-                        <div className="content-section" style={{ marginBottom: '24px' }}>
-                            <h2>🌍 지원 언어 ({languages.length}개국어)</h2>
-                            <p style={{ lineHeight: '2' }}>{languages.join(' • ')}</p>
+                        <div className="detail-section">
+                            <div className="detail-section-header">지원 언어 ({languages.length}개국어)</div>
+                            <p className="detail-languages">{languages.join(' · ')}</p>
                         </div>
                     )}
-                    <div className="legal-section">
-                        <h3 className="legal-title">📋 법적 고지</h3>
+                    <div className="detail-section">
+                        <div className="detail-section-header">법적 고지</div>
                         <div className="legal-links">
-                            <a className="legal-link" onClick={() => onLegalClick('termsOfService', project.slug)}>📄 이용약관</a>
-                            <a className="legal-link" onClick={() => onLegalClick('privacyPolicy', project.slug)}>🔒 개인정보 처리방침</a>
+                            <button className="legal-link" onClick={() => onLegalClick('termsOfService', project.slug)}>이용약관</button>
+                            <button className="legal-link" onClick={() => onLegalClick('privacyPolicy', project.slug)}>개인정보 처리방침</button>
                         </div>
                     </div>
                 </div>
@@ -279,17 +301,20 @@
                     <React.Fragment>
                         <Hero />
                         <section id="projects">
-                            <header className="page-header">
-                                <h1 className="page-title">Our Projects</h1>
-                                <p className="page-subtitle">{activeCategory === 'all' ? '모든 프로젝트' : categories.find(c => c.id === activeCategory)?.name} 목록입니다</p>
-                            </header>
-                            {filteredProjects.length === 0 ? (
-                                <div className="loading">해당 카테고리에 프로젝트가 없습니다</div>
-                            ) : (
-                                <div className="project-grid">
-                                    {filteredProjects.map((project, idx) => <ProjectCard key={project.slug || idx} project={project} onClick={() => navigateTo('/project/' + project.slug)} />)}
-                                </div>
-                            )}
+                            <div className="section-header">
+                                <h2 className="section-title">Our Projects</h2>
+                                <span className="section-count">{filteredProjects.length} works</span>
+                            </div>
+                            <div className="project-grid">
+                                {filteredProjects.map((project, idx) => (
+                                    <ProjectCard
+                                        key={project.slug || idx}
+                                        project={project}
+                                        featured={idx === filteredProjects.length - 1 && filteredProjects.length > 2}
+                                        onClick={() => navigateTo('/project/' + project.slug)}
+                                    />
+                                ))}
+                            </div>
                         </section>
                     </React.Fragment>
                 );
