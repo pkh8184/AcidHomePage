@@ -6,99 +6,13 @@
     <title>AcidStudio - Projects</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-    <style>
-        :root { --bg-primary: #0a0a0f; --bg-secondary: #12121a; --bg-card: #1a1a24; --bg-card-hover: #222230; --accent-primary: #00ff88; --accent-secondary: #ff3366; --accent-tertiary: #6c5ce7; --accent-app: #ff9f43; --text-primary: #ffffff; --text-secondary: #a0a0b0; --text-muted: #606070; --border-color: #2a2a3a; --gradient-acid: linear-gradient(135deg, #00ff88 0%, #00cc6a 100%); --gradient-pink: linear-gradient(135deg, #ff3366 0%, #ff6b9d 100%); --gradient-purple: linear-gradient(135deg, #6c5ce7 0%, #a29bfe 100%); --gradient-orange: linear-gradient(135deg, #ff9f43 0%, #ffbe76 100%); }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Outfit', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; overflow-x: hidden; }
-        .bg-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px); background-size: 50px 50px; pointer-events: none; z-index: 0; }
-        .bg-glow { position: fixed; width: 600px; height: 600px; border-radius: 50%; filter: blur(150px); opacity: 0.15; pointer-events: none; z-index: 0; }
-        .bg-glow-1 { top: -200px; right: -200px; background: var(--accent-primary); }
-        .bg-glow-2 { bottom: -200px; left: -200px; background: var(--accent-tertiary); }
-        .app-container { display: flex; min-height: 100vh; position: relative; z-index: 1; }
-        .sidebar { width: 280px; min-height: 100vh; padding: 40px 24px; background: var(--bg-secondary); border-right: 1px solid var(--border-color); position: fixed; left: 0; top: 0; overflow-y: auto; }
-        .logo-section { margin-bottom: 40px; }
-        .logo { width: 80px; height: 80px; background: var(--gradient-acid); border-radius: 20px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3); position: relative; overflow: hidden; cursor: pointer; }
-        .logo::before { content: ""; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: linear-gradient(45deg, transparent, rgba(255,255,255,0.1), transparent); transform: rotate(45deg); animation: shimmer 3s infinite; }
-        @keyframes shimmer { 0% { transform: translateX(-100%) rotate(45deg); } 100% { transform: translateX(100%) rotate(45deg); } }
-        .logo-text { font-size: 28px; font-weight: 800; color: var(--bg-primary); z-index: 1; }
-        .studio-name { font-size: 22px; font-weight: 700; margin-bottom: 8px; background: var(--gradient-acid); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; cursor: pointer; }
-        .studio-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-        .category-section { margin-bottom: 24px; }
-        .category-title { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 500; color: var(--text-muted); text-transform: uppercase; letter-spacing: 2px; padding: 8px 12px; background: var(--bg-card); border-radius: 6px; margin-bottom: 12px; border-left: 3px solid var(--accent-primary); }
-        .category-list { list-style: none; }
-        .category-item { padding: 10px 12px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; border-radius: 8px; transition: all 0.2s ease; display: flex; align-items: center; gap: 10px; }
-        .category-item:hover { background: var(--bg-card); color: var(--text-primary); }
-        .category-item.active { background: rgba(0, 255, 136, 0.1); color: var(--accent-primary); }
-        .category-item .count { margin-left: auto; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted); background: var(--bg-card); padding: 2px 8px; border-radius: 10px; }
-        .main-content { flex: 1; margin-left: 280px; padding: 40px; }
-        .page-header { margin-bottom: 40px; }
-        .page-title { font-size: 42px; font-weight: 800; margin-bottom: 8px; letter-spacing: -1px; }
-        .page-subtitle { font-size: 16px; color: var(--text-secondary); }
-        .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 24px; }
-        .project-card { background: var(--bg-card); border-radius: 16px; overflow: hidden; border: 1px solid var(--border-color); cursor: pointer; transition: all 0.3s ease; animation: fadeInUp 0.5s ease forwards; opacity: 0; }
-        .project-card:hover { transform: translateY(-8px); border-color: var(--accent-primary); box-shadow: 0 20px 60px rgba(0, 255, 136, 0.15); }
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        .project-card:nth-child(1) { animation-delay: 0.1s; } .project-card:nth-child(2) { animation-delay: 0.15s; } .project-card:nth-child(3) { animation-delay: 0.2s; } .project-card:nth-child(4) { animation-delay: 0.25s; }
-        .project-thumbnail { width: 100%; height: 200px; background: var(--bg-secondary); display: flex; align-items: center; justify-content: center; position: relative; overflow: hidden; }
-        .project-thumbnail img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
-        .project-card:hover .project-thumbnail img { transform: scale(1.1); }
-        .project-thumbnail-placeholder { width: 80px; height: 80px; border-radius: 16px; display: flex; align-items: center; justify-content: center; font-size: 32px; font-weight: 800; }
-        .project-info { padding: 20px; }
-        .project-category-tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; padding: 4px 10px; border-radius: 20px; display: inline-block; margin-bottom: 12px; }
-        .tag-asset { background: rgba(0, 255, 136, 0.15); color: var(--accent-primary); }
-        .tag-game { background: rgba(255, 51, 102, 0.15); color: var(--accent-secondary); }
-        .tag-website { background: rgba(108, 92, 231, 0.15); color: var(--accent-tertiary); }
-        .tag-app { background: rgba(255, 159, 67, 0.15); color: var(--accent-app); }
-        .project-title { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--text-primary); }
-        .project-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.5; }
-        .project-detail { display: none; animation: fadeIn 0.3s ease; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        .project-detail.active { display: block; }
-        .back-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 10px; color: var(--text-secondary); font-size: 14px; font-weight: 500; cursor: pointer; transition: all 0.3s ease; margin-bottom: 30px; }
-        .back-btn:hover { background: var(--bg-card-hover); color: var(--text-primary); border-color: var(--accent-primary); }
-        .detail-header { display: flex; gap: 40px; margin-bottom: 40px; }
-        .detail-thumbnail { width: 400px; height: 300px; background: var(--bg-card); border-radius: 16px; overflow: hidden; flex-shrink: 0; }
-        .detail-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
-        .detail-info { flex: 1; }
-        .detail-title { font-size: 36px; font-weight: 800; margin-bottom: 16px; }
-        .detail-desc { font-size: 16px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 24px; }
-        .detail-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .detail-link { display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; background: var(--gradient-acid); border-radius: 10px; color: var(--bg-primary); text-decoration: none; font-size: 14px; font-weight: 600; transition: all 0.3s ease; }
-        .detail-link:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0, 255, 136, 0.4); }
-        .legal-section { margin-top: 40px; padding: 24px; background: var(--bg-card); border-radius: 16px; border: 1px solid var(--border-color); }
-        .legal-title { font-size: 16px; font-weight: 600; margin-bottom: 16px; color: var(--text-primary); }
-        .legal-links { display: flex; gap: 12px; flex-wrap: wrap; }
-        .legal-link { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; background: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; color: var(--text-secondary); text-decoration: none; font-size: 13px; font-weight: 500; transition: all 0.3s ease; cursor: pointer; }
-        .legal-link:hover { background: var(--bg-card-hover); color: var(--text-primary); border-color: var(--accent-tertiary); }
-        .content-section { background: var(--bg-card); border-radius: 16px; padding: 32px; border: 1px solid var(--border-color); }
-        .content-section h2 { font-size: 24px; font-weight: 700; margin-bottom: 20px; }
-        .content-section p { font-size: 15px; color: var(--text-secondary); line-height: 1.8; margin-bottom: 16px; }
-        .feature-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; margin: 24px 0; }
-        .feature-item { background: var(--bg-secondary); padding: 16px; border-radius: 12px; border: 1px solid var(--border-color); }
-        .feature-item h4 { font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--accent-primary); }
-        .feature-item p { font-size: 13px; color: var(--text-secondary); margin: 0; }
-        .legal-page { max-width: 900px; }
-        .legal-page h1 { font-size: 36px; margin-bottom: 8px; }
-        .legal-page .last-updated { font-size: 13px; color: var(--text-muted); margin-bottom: 32px; }
-        .legal-page h2 { font-size: 20px; font-weight: 700; margin-top: 32px; margin-bottom: 16px; color: var(--accent-primary); }
-        .legal-page h3 { font-size: 16px; font-weight: 600; margin-top: 24px; margin-bottom: 12px; color: var(--text-primary); }
-        .legal-page p, .legal-page li { font-size: 15px; color: var(--text-secondary); line-height: 1.8; }
-        .legal-page ul, .legal-page ol { margin-left: 24px; margin-bottom: 16px; }
-        .legal-page li { margin-bottom: 8px; }
-        .legal-page .warning-box { background: rgba(255, 51, 102, 0.1); border: 1px solid rgba(255, 51, 102, 0.3); border-radius: 8px; padding: 16px; margin: 16px 0; }
-        .legal-page .warning-box p { color: var(--accent-secondary); margin: 0; }
-        .legal-page .info-box { background: rgba(0, 255, 136, 0.1); border: 1px solid rgba(0, 255, 136, 0.3); border-radius: 8px; padding: 16px; margin: 16px 0; }
-        .legal-page .info-box p { color: var(--accent-primary); margin: 0; }
-        .loading { display: flex; align-items: center; justify-content: center; height: 200px; color: var(--text-muted); }
-        @media (max-width: 1024px) { .sidebar { width: 240px; } .main-content { margin-left: 240px; } .detail-header { flex-direction: column; } .detail-thumbnail { width: 100%; } }
-        @media (max-width: 768px) { .sidebar { position: relative; width: 100%; min-height: auto; border-right: none; border-bottom: 1px solid var(--border-color); } .main-content { margin-left: 0; } .app-container { flex-direction: column; } .project-grid { grid-template-columns: 1fr; } }
-    </style>
+    <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="bg-grid"></div>
     <div class="bg-glow bg-glow-1"></div>
-    <div class="bg-glow bg-glow-2"></div>
     <div id="app"></div>
     <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
@@ -136,7 +50,6 @@
             return window.location.href.split('#')[0].replace(/\/[^\/]*$/, '/') + path;
         };
 
-
         const categories = [
             { id: 'all', name: '전체', icon: '🎯' },
             { id: 'asset', name: '에셋', icon: '📦' },
@@ -165,6 +78,58 @@
         };
 
         const TextWithBreaks = ({ text }) => <span dangerouslySetInnerHTML={{ __html: parseLineBreaks(text).replace(/\n/g, '<br/>') }} />;
+
+        const Navbar = ({ activeCategory, onCategoryChange, onLogoClick }) => {
+            const [scrolled, setScrolled] = useState(false);
+            useEffect(() => {
+                const handleScroll = () => setScrolled(window.scrollY > 20);
+                window.addEventListener('scroll', handleScroll);
+                return () => window.removeEventListener('scroll', handleScroll);
+            }, []);
+            return (
+                <nav className={"navbar" + (scrolled ? " navbar-scrolled" : "")}>
+                    <div className="navbar-inner">
+                        <div className="navbar-logo" onClick={onLogoClick}>
+                            <div className="logo-mark">A</div>
+                            <span className="logo-text">AcidStudio</span>
+                        </div>
+                        <div className="navbar-links">
+                            {categories.map(cat => (
+                                <button key={cat.id}
+                                    className={"nav-link" + (activeCategory === cat.id ? " active" : "")}
+                                    onClick={() => onCategoryChange(cat.id)}>
+                                    {cat.name}
+                                </button>
+                            ))}
+                        </div>
+                    </div>
+                </nav>
+            );
+        };
+
+        const Hero = () => (
+            <section className="hero">
+                <div className="hero-badge">Independent Dev Studio</div>
+                <h1 className="hero-title">AcidStudio</h1>
+                <p className="hero-desc">게임 · 에셋 · 앱 개발 스튜디오</p>
+                <a href="#projects" className="hero-cta" onClick={(e) => {
+                    e.preventDefault();
+                    document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
+                }}>
+                    프로젝트 보기 <span className="hero-cta-arrow">↓</span>
+                </a>
+            </section>
+        );
+
+        const Footer = () => (
+            <footer className="footer">
+                <div className="footer-inner">
+                    <span className="footer-copy">© 2026 AcidStudio</span>
+                    <span className="footer-dot">·</span>
+                    <span className="footer-text">All rights reserved</span>
+                </div>
+            </footer>
+        );
 
         const ProjectCard = ({ project, onClick }) => {
             const tag = getCategoryTag(project.category);
@@ -243,28 +208,6 @@
             );
         };
 
-        const Sidebar = ({ activeCategory, onCategoryChange, projectCounts, onLogoClick }) => (
-            <aside className="sidebar">
-                <div className="logo-section">
-                    <div className="logo" onClick={onLogoClick}><span className="logo-text">A</span></div>
-                    <h1 className="studio-name" onClick={onLogoClick}>AcidStudio</h1>
-                    <p className="studio-desc">게임 / 에셋 / 웹 / 앱<br/>개발 스튜디오</p>
-                </div>
-                <nav>
-                    <div className="category-section">
-                        <div className="category-title">카테고리</div>
-                        <ul className="category-list">
-                            {categories.map(cat => (
-                                <li key={cat.id} className={"category-item " + (activeCategory === cat.id ? 'active' : '')} onClick={() => onCategoryChange(cat.id)}>
-                                    <span>{cat.icon}</span><span>{cat.name}</span><span className="count">{projectCounts[cat.id] || 0}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </nav>
-            </aside>
-        );
-
         const App = () => {
             const [projects, setProjects] = useState([]);
             const [legalContent, setLegalContent] = useState(null);
@@ -319,14 +262,6 @@
                 return () => window.removeEventListener('hashchange', handleHashChange);
             }, [projects]);
 
-            const projectCounts = {
-                all: projects.length,
-                asset: projects.filter(p => p.category === 'asset').length,
-                game: projects.filter(p => p.category === 'game').length,
-                website: projects.filter(p => p.category === 'website').length,
-                app: projects.filter(p => p.category === 'app').length
-            };
-
             const filteredProjects = activeCategory === 'all' ? projects : projects.filter(p => p.category === activeCategory);
 
             const renderContent = () => {
@@ -342,25 +277,29 @@
                 }
                 return (
                     <React.Fragment>
-                        <header className="page-header">
-                            <h1 className="page-title">Our Projects</h1>
-                            <p className="page-subtitle">{activeCategory === 'all' ? '모든 프로젝트' : categories.find(c => c.id === activeCategory)?.name} 목록입니다</p>
-                        </header>
-                        {filteredProjects.length === 0 ? (
-                            <div className="loading">해당 카테고리에 프로젝트가 없습니다</div>
-                        ) : (
-                            <div className="project-grid">
-                                {filteredProjects.map((project, idx) => <ProjectCard key={project.slug || idx} project={project} onClick={() => navigateTo('/project/' + project.slug)} />)}
-                            </div>
-                        )}
+                        <Hero />
+                        <section id="projects">
+                            <header className="page-header">
+                                <h1 className="page-title">Our Projects</h1>
+                                <p className="page-subtitle">{activeCategory === 'all' ? '모든 프로젝트' : categories.find(c => c.id === activeCategory)?.name} 목록입니다</p>
+                            </header>
+                            {filteredProjects.length === 0 ? (
+                                <div className="loading">해당 카테고리에 프로젝트가 없습니다</div>
+                            ) : (
+                                <div className="project-grid">
+                                    {filteredProjects.map((project, idx) => <ProjectCard key={project.slug || idx} project={project} onClick={() => navigateTo('/project/' + project.slug)} />)}
+                                </div>
+                            )}
+                        </section>
                     </React.Fragment>
                 );
             };
 
             return (
                 <div className="app-container">
-                    <Sidebar activeCategory={activeCategory} onCategoryChange={(cat) => { setActiveCategory(cat); navigateTo('/'); }} projectCounts={projectCounts} onLogoClick={() => navigateTo('/')} />
+                    <Navbar activeCategory={activeCategory} onCategoryChange={(cat) => { setActiveCategory(cat); navigateTo('/'); }} onLogoClick={() => navigateTo('/')} />
                     <main className="main-content">{renderContent()}</main>
+                    <Footer />
                 </div>
             );
         };
