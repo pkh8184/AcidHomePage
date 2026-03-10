@@ -224,18 +224,44 @@ body {
 .footer { padding: 40px; border-top: 1px solid var(--border-color); margin-top: 80px; }
 .footer-inner { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--text-muted); }
 
-/* Responsive */
-@media (max-width: 1024px) {
-    .hero-title { font-size: 48px; }
-    .detail-title { font-size: 32px; }
-}
+/* Hamburger */
+.hamburger { display: none; background: none; border: none; cursor: pointer; width: 32px; height: 32px; position: relative; }
+.hamburger-line, .hamburger-line::before, .hamburger-line::after { display: block; width: 20px; height: 2px; background: var(--text-primary); position: absolute; left: 6px; transition: all 0.2s ease; }
+.hamburger-line { top: 15px; }
+.hamburger-line::before { content: ''; top: -6px; }
+.hamburger-line::after { content: ''; top: 6px; }
+.hamburger-line.open { background: transparent; }
+.hamburger-line.open::before { top: 0; transform: rotate(45deg); }
+.hamburger-line.open::after { top: 0; transform: rotate(-45deg); }
 
+/* Mobile menu overlay */
+.mobile-menu { position: fixed; inset: 0; z-index: 99; background: rgba(9, 9, 11, 0.95); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); display: flex; align-items: center; justify-content: center; animation: fadeIn 0.2s ease; }
+.mobile-menu-inner { display: flex; flex-direction: column; gap: 8px; }
+.mobile-menu-item { background: none; border: none; color: var(--text-secondary); font-size: 24px; font-weight: 600; padding: 16px 32px; cursor: pointer; transition: all 0.2s ease; font-family: inherit; border-radius: 12px; text-align: center; }
+.mobile-menu-item:hover, .mobile-menu-item.active { color: var(--accent-primary); }
+
+/* Desktop/Mobile visibility */
+.desktop-only { display: flex; }
+.mobile-only { display: none; }
+
+/* Responsive */
 @media (max-width: 768px) {
-    .main-content { padding: 84px 20px 20px; }
+    .desktop-only { display: none !important; }
+    .mobile-only { display: block !important; }
+    .hero-title { font-size: 36px; }
+    .hero-desc { font-size: 16px; }
+    .hero { min-height: 50vh; padding: 100px 20px 60px; }
+    .main-content { padding: 80px 20px 20px; }
     .navbar { padding: 0 20px; }
     .project-grid { grid-template-columns: 1fr; }
-    .hero { min-height: 50vh; padding: 80px 20px 60px; }
-    .hero-title { font-size: 36px; }
-    .navbar-links { gap: 0; }
-    .nav-link { padding: 8px 10px; font-size: 13px; }
+    .project-card-featured .project-thumbnail { height: 200px; }
+    .project-thumbnail { height: 200px; }
+    .detail-title { font-size: 28px; }
+    .feature-grid { grid-template-columns: 1fr 1fr; }
+    .section-header { flex-direction: column; gap: 4px; }
+}
+
+@media (max-width: 480px) {
+    .feature-grid { grid-template-columns: 1fr; }
+    .legal-links { flex-direction: column; }
 }
