@@ -27,7 +27,7 @@
 
         const parseCSV = (csv) => {
             csv = csv.replace(/^\uFEFF/, '');
-            const lines = csv.trim().split('\n');
+            const lines = csv.trim().split('\n').filter(line => line.trim());
             const headers = lines[0].split(',');
             return lines.slice(1).map(line => {
                 const values = [];
